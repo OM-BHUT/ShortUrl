@@ -6,7 +6,7 @@ import path from "node:path";
 export default defineConfig({
   server:{
     proxy:{
-      '/api' : 'http://localhost:8080'
+      '/api' : 'https://urlencoder123.netlify.app'
     }
   },
   plugins: [react()],
