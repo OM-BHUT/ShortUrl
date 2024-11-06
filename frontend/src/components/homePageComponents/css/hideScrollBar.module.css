@@ -1,0 +1,11 @@
+.scrollbarHide {
+    scrollbar-width: none; /* Firefox */
+}
+
+.scrollbarHide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+.scrollbarHide {
+    -ms-overflow-style: none; /* IE and Edge */
+}
