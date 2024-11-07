@@ -10,7 +10,6 @@ const {checkForAuthentication,
     restrictTo,
 } = require('./middleWares/auth');
 const userRouter = require('./routes/user');
-const staticRouter = require('./routes/staticRoutes')
 const mongoose = require('mongoose');
 const port = process.env.PORT || 8080;
 const cors = require('cors');
@@ -37,7 +36,6 @@ const googleRoutes = require('./routes/googleRoutes');
      app.use(passport.initialize());
      app.use(passport.session());
      app.use('/api/static',express.static(path.join(__dirname,'public/images')));
-     app.use('/api',staticRouter);
     app.use('/api/shortUrl',checkForAuthentication,router);
     app.use('/api/users',userRouter);
     app.use('/api/google',googleRoutes);

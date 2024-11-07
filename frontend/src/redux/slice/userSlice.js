@@ -19,7 +19,8 @@ export const userSlice = createSlice({
         name:'',
         profilePicture:'',
         userType:'normal',
-        host: ''
+        host: '',
+        role:''
     },
     reducers: {
         addUser: (state, action) => {

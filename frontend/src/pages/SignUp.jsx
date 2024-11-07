@@ -27,7 +27,6 @@ export function SignUp() {
         setIsLoading(true);
         axios.post('/api/users',data)
             .then(res=>{
-                console.log(res.data);
 
                 dispatch(addUser(res.data))
                 navigate('/verifyOtp');

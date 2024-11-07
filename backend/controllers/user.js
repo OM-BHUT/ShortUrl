@@ -22,14 +22,10 @@ async function handleUserSignUp(req, res) {
 
 
 async function handleUserLogin(req, res) {
-  console.log('from handleUserLogin');
   const { email, password } = req.body;
-  console.log('email = '+email);
-  console.log('pass = '+password);
   const user = await User.findOne({ email });
 
   if (!user) {
-    console.log('!user');
     return res.status(400).json({error:true,message:'user not found'});
   }
   const hashPasswordFromDb = user.password;
@@ -48,28 +44,8 @@ async function handleUserLogin(req, res) {
   res.cookie("userId", token);
   return res.send(user);
 }
-            
-async function showSignUp(req, res) {
-  return res.redirect("/signUp");
-}
 
-async function giveAllInfo(req,res){
-  const token = req.cookies?.userId;
-  if (!token){
-    return res.status(400).json({error:'token not found'});
-  }
-  const user = getUser(token);
 
-  if (!user){
-    return res.status(400).json({error:'user not signedUp'});
-  }
-
-  const userInfo = await User.findOne({
-    _id:user._id,
-    email: user.email
-  });
-
-}
 
 async function handleTokenUser(req,res){
   try {
@@ -132,9 +108,7 @@ async function handleTokenUserGoogle(req,res){
 }
 
 async function giveHostName(req,res){
-  console.log('from giveHostName');
   const host = req.get('host');
-  console.log(host);
   return res.send(host);
 }
 
@@ -143,35 +117,10 @@ async function handleLogOut(req,res){
   res.status(200).json({message:'user logged Out Successfully'});
 }
 
-// async function giveInfo(req,res){
-//   console.log('from giveInfo');
-//   const token = req.cookies.userId;
-//   if (!token){
-//     return res.status(401).json({message:'not authorized'});
-//   }
-//   const user = getUser(token);
-//   if (!user){
-//     return res.status(401).json({message:'not authorized'});
-//   }
-//   const dbToUse = user.userType === 'google' ? GoogleUsers : User;
-//
-//   console.log(dbToUse)
-//
-//   const userInfo = await dbToUse.findOne({
-//     _id:user._id,
-//     email: user.email
-//   });
-//
-//   console.log('userInfo = '+userInfo)
-//   if (!userInfo){
-//     return res.status(404).json({message: 'user not found in db'});
-//   }
-//   return res.send(userInfo);
-// }
+
 
 async function giveTokenInfo(req,res){
 
-  console.log('from giveTokenInfo');
   const token = req.cookies.userId;
   if (!token){
     return res.status(401).json({message:'not authorized'});
@@ -205,7 +154,6 @@ async function handleForgetPass(req,res){
 
 async function changeProfilePicture(req,res){
   try {
-    console.log('from changeProfilePicture');
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' });
     }
@@ -213,7 +161,6 @@ async function changeProfilePicture(req,res){
       if (!user){
         return res.status(400);
       }
-    console.log('req.profilePicture = '+req.file);
     const localFilePath = req.file.path; // Path to the uploaded file in ./public/temp
     const response = await uploadOnCloudinary(localFilePath,`profile_pictures/${user._id}`);
     if (response) {
@@ -244,7 +191,6 @@ async function handleSetToDefault(req,res){
     await user.save();
     return res.status(200).send({defaultUrl : defaultImg});
   }catch (e) {
-    console.log('err',e);
   }
 }
 
@@ -254,8 +200,6 @@ async function changeName(req,res){
   if (!user){
     return res.status(404);
   }
-    console.log('user ',user);
-    console.log(req.body)
   user.name = req.body.name;
 
   await user.save();
@@ -266,10 +210,12 @@ async function changeName(req,res){
   }
 }
 
+
+
+
 module.exports = {
   handleUserSignUp,
   handleUserLogin,
-  showSignUp,
   handleTokenUser,
   handleTokenUserGoogle,
   giveTokenInfo,
@@ -278,5 +224,6 @@ module.exports = {
   handleForgetPass,
   changeProfilePicture,
   handleSetToDefault,
-  changeName
+  changeName,
+
 };

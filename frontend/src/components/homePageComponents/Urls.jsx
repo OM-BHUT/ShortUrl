@@ -8,14 +8,12 @@ import Swal from 'sweetalert2'
 export function Urls() {
     const urls = useSelector(state => state.shortUrls);
     const host = useSelector(state => state.user.host);
+    console.log(urls);
     const dispatch = useDispatch();
     const [error,setError] = useState('');
     const [message,setMessage] = useState('');
     const [expandedRow,setExpandedRow] = useState(null);
 
-    useEffect(() => {
-        dispatch(fetchUrls());
-    }, [urls]);
 
     function redirectUrl(url) {
         let newUrl = url.split('://');

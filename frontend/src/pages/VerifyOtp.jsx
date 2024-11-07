@@ -17,7 +17,6 @@ export function VerifyOtp() {
     const [timerId, setTimerId] = useState(null);
     const user = useSelector(state => state.user);
     const [isLoading,setIsLoading] = useState(false);
-    console.log(user);
 
     useEffect(()=>{
         if (user.email==='' || Object.keys(user).length===0){

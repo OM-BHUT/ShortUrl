@@ -6,7 +6,6 @@ import {useEffect} from "react";
 
 export function DetailsPage() {
     const user = useSelector(state => state.user);
-    console.log(user)
     const navigate = useNavigate();
     const dispatch = useDispatch();
     useEffect(()=>{

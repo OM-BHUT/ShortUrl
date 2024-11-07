@@ -11,7 +11,6 @@ passport.use(new GoogleStrategy({
     },
     async function(accessToken, refreshToken, profile, cb) {
         try {
-            console.log('entered passport.js');
             let user = await GoogleUsers.findOne({googleId: profile.id});
             if (!user){
                 user = await GoogleUsers.create({

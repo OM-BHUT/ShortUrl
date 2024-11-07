@@ -13,7 +13,6 @@ if (!fs.existsSync(tempDir)) {
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        console.log("Destination path:", tempDir); // Verify the path
         cb(null, tempDir);
     },
     filename: async function (req, file, cb) {
@@ -27,14 +26,12 @@ const storage = multer.diskStorage({
             const localFilePath = path.join(tempDir, nameOfFile);
 
             // Log the full file path for debugging
-            console.log("Generated file path:", localFilePath);
 
             // Check if the file exists and delete it if necessary
             if (fs.existsSync(localFilePath)) {
                 fs.unlinkSync(localFilePath);
             }
             cb(null, nameOfFile);
-            console.log('Multer middleware completed');
         } catch (e) {
             console.error('Error in filename callback:', e);
             cb(e, false);

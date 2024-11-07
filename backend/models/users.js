@@ -17,6 +17,10 @@ const schema = new mongoose.Schema({
         type:String,
         default:'/api/static/default-profile-account.jpg'
     },
+    role:{
+      type:String,
+        default:'normal'
+    },
     userType:{
        type:String,
        default:'otp'

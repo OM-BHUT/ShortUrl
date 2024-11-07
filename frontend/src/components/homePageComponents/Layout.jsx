@@ -6,10 +6,6 @@ import {useEffect} from "react";
 import axios from "axios";
 import {logOutUser} from "@/redux/slice/userSlice.js";
 
-const navigation = [
-    { name: 'All Urls', href: '/home', current: true },
-    { name: 'Contact Me', href: '/home/contact', current: false }
-]
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -19,7 +15,11 @@ export function Layout() {
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
-    console.log(user);
+    const navigation = [
+        { name: 'All Urls', href: '/home', current: true },
+        ...(user.role === 'admin' ? [{ name: 'Admin', href: '/home/admin', current: false }] : []),
+        { name: 'Contact Me', href: '/home/contact', current: false },
+    ]
     useEffect(()=>{
     if (user.email==='' || Object.keys(user).length===0){
         navigate('/login');

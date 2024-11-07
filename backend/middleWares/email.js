@@ -13,7 +13,6 @@ async function sendVerificationEmail(email,verification) {
             html: "<h1>"+verification+"</h1>", // html body
         });
 
-        console.log("Message sent: ");
 
     }catch (error){
         console.log('email error '+error);
@@ -29,7 +28,6 @@ async function sendWelcomeEmail(email,name){
             text: "Welcome Email", // plain text body
             html: "<h1>Welcome To Url Shortener</h1>", // html body
         });
-        console.log("Message sent: ");
 
     }catch (e) {
         console.log('error at welcome = '+e)

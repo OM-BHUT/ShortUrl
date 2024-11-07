@@ -27,8 +27,6 @@ export function Login() {
                 const response = await axios.get('/api/users/isVerified'+type);
                 if (response.status===200){
                     const host = (await axios.get('/api/users/hostAddress')).data;
-                    console.log('from fetchUser');
-                    console.log(host.data);
                     dispatch(addUser({...response.data,host}));
                     navigate('/home');
                 }
@@ -44,16 +42,16 @@ export function Login() {
         e.preventDefault();
         setIsLoading(true);
         try {
+            console.log('from handleLogin');
             const res = await axios.post('/api/users/login', data);
             if (res.status === 200) {
                 const host = (await axios.get('/api/users/hostAddress')).data;
-                console.log('from handleLogin');
-                console.log(host);
                 dispatch(addUser({...res.data,host}));
                 // You can navigate here if needed
                 navigate('/home');
             }
         } catch (err) {
+            console.log(err);
             if (err.response) {
                 const message = err.response.data.message;
                 setError(message);
@@ -83,7 +81,7 @@ export function Login() {
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Sign in to your account
                             </h1>
-                            <form className="space-y-4" onSubmit={(e)=>{handleLogin(e)}}>
+                            <form className="space-y-4" onSubmit={handleLogin}>
                                 <div>
                                     <label htmlFor="email"
                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your

@@ -5,6 +5,10 @@ const userSchema = new mongoose.Schema({
     name: { type: String },
     email: { type: String, unique: true },
     profilePicture: { type: String },
+    role:{
+        type:String,
+        default:'normal'
+    },
     userType:   {type:String,default:'google'}
 });
 

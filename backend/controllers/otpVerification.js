@@ -7,7 +7,6 @@ const {setUser, getUser} = require("../services/auth");
 
 async function handleRegister(req, res) {
     try {
-        console.log('from handleRegister');
         const { email, password, name } = req.body;
 
         if (!email || !password || !name) {
@@ -57,13 +56,11 @@ async function handleRegister(req, res) {
 
 async function verifyEmail(req,res){
     try {
-        console.log('entered verifyEmail');
         const {code} = req.body;
         const user = await User.findOne({
             verificationToken:code,
             verificationTokenExpiresAt:{$gt:Date.now()}
         })
-        console.log(user);
         if (!user){
             return res.status(400).json({ success: false, message: 'User not exist or token expired' });
         }
@@ -90,26 +87,22 @@ async function giveEmailInfo(req,res){
 
 async function resendOtp(req,res){
     try {
-        console.log('from resendOtp');
     const token = req.cookies?.userId;
     if (!token){
         return res.status(404).json({error:'no token'});
     }
     const user = getUser(token);
-        console.log(user);
     const {email} = user;
     const verificationToken = Math.floor(1000+Math.random()*9000).toString();
     const userFromDb = await User.findOne({
         email:email
     });
-        console.log(userFromDb)
     if (!userFromDb){
         return res.status(400).json({error:'user Not Found please signUp again'});
     }
     userFromDb.verificationToken = verificationToken;
     await userFromDb.save();
     await sendVerificationEmail(email,verificationToken);
-        console.log('completed')
     return res.json({message:'otp sent successfully'});
     }catch (e) {
         console.log('error ',e)

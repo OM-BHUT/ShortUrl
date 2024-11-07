@@ -25,7 +25,6 @@ export function EditPage() {
 
     function handleFileChange(e){
         e.preventDefault();
-        console.log('entered handleFileChange');
         setInputChange(true);
         setFile(e.target.files[0]);
     }
