@@ -26,12 +26,18 @@ const googleRoutes = require('./routes/googleRoutes');
              secret: process.env.SESSION_SECRET_KEY,
              resave: false,
              saveUninitialized: true,
-             cookie: { maxAge: 24 * 60 * 60 * 1000 } // Configured session expiration
+             cookie: {
+                 maxAge: 24 * 60 * 60 * 1000, // 1 day
+                 sameSite: 'none', // Allows cross-origin cookies
+             }
          })
-     )
+     );
+
      app.use(cors({
-         origin: 'https://shorturlob.onrender.com'
+         origin: 'https://shorturlob.onrender.com',
+         credentials: true // Allows cookies and credentials to be sent with requests
      }));
+
      app.use(cookieParser());
      app.use(express.urlencoded({extended: false}));
      app.use(bodyParse());
