@@ -6,7 +6,7 @@ import path from "node:path";
 export default defineConfig({
   server:{
     proxy:{
-      '/api' : 'http://localhost:8080'
+      '/api' : 'https://shorturl-16sn.onrender.com'
     }
   },
   plugins: [react()],
