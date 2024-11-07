@@ -29,6 +29,9 @@ const googleRoutes = require('./routes/googleRoutes');
              cookie: { maxAge: 24 * 60 * 60 * 1000 } // Configured session expiration
          })
      )
+     app.use(cors({
+         origin: 'https://shorturlob.onrender.com'
+     }));
      app.use(cookieParser());
      app.use(express.urlencoded({extended: false}));
      app.use(bodyParse());
