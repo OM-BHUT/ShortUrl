@@ -14,6 +14,9 @@ export function Urls() {
     const [message,setMessage] = useState('');
     const [expandedRow,setExpandedRow] = useState(null);
 
+    useEffect(()=>{
+        dispatch(fetchUrls());
+    },[]);
 
     function redirectUrl(url) {
         let newUrl = url.split('://');

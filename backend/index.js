@@ -1,14 +1,10 @@
 require('dotenv').config();
 const express = require('express');
-const {connectToMongo} = require('./connection');
-const shortUrl = require('./models/shortUrl');
 const cookieParser = require('cookie-parser');
 const router = require('./routes/shortUrlRoutes');
 const { bodyParse } = require('./middleWares/index');
 const path = require('path');
-const {checkForAuthentication,
-    restrictTo,
-} = require('./middleWares/auth');
+const {checkForAuthentication} = require('./middleWares/auth');
 const userRouter = require('./routes/user');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 8080;
@@ -19,8 +15,6 @@ const googleRoutes = require('./routes/googleRoutes');
 
  mongoose.connect(process.env.DBURL).then(()=>{
      const app=express();
-     app.set('view engine','ejs');
-     app.set('views',path.resolve('./views'));
      app.use(
          session({
              secret: process.env.SESSION_SECRET_KEY,

@@ -4,6 +4,7 @@ const {getUser} = require("./auth");
 
 
 async function giveUserFromDb(token){
+    console.log('from giveUserFromDb');
     if (!token){
         return null;
     }
@@ -12,6 +13,7 @@ async function giveUserFromDb(token){
         return null;
     }
     const dbToUse = userFromToken.userType==='google' ? GoogleUser : User;
+    console.log(dbToUse.name);
     const user = await dbToUse.findOne({
         _id:userFromToken._id,
         email: userFromToken.email

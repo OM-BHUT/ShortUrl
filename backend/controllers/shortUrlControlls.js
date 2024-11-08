@@ -54,7 +54,8 @@ async function handleAnalytics(req,res){
 // get all
 async function handleGetAll(req,res){
     console.log('from handleGetAll');
-    const url = await shortUrl.find({createdBy: req.user?.email});
+
+    const url = await shortUrl.find({createdBy: req.user.email});
     if (!url){
         return res.status(404).json({error:'urls not founded'});
     }
