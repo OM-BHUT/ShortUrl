@@ -16,7 +16,12 @@ export function Urls() {
     const [expandedRow,setExpandedRow] = useState(null);
 
     useEffect(()=>{
-        dispatch(fetchUrls());
+        try {
+            dispatch(fetchUrls());
+        }catch (e) {
+            console.log(e);
+            setError('error fetching data');
+        }
     },[]);
 
     useEffect(()=>{
