@@ -40,7 +40,9 @@ googleRoutes.get('/login/failed',(req,res)=>{
 googleRoutes.get('/callback', passport.authenticate('google', {
     failureRedirect: '/api/google/login/failed'
 }),(req,res)=>{
+    console.log('from /callback');
     const {user} = req;
+    console.log(user);
     const token = setUser(user);
     res.cookie('userId',token,{
         httpOnly: true,
