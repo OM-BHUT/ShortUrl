@@ -4,10 +4,15 @@ const {getUser} = require("./auth");
 
 
 async function giveUserFromDb(token){
+    console.log('from giveUserFromDb');
+    console.log(token);
+    
     if (!token){
         return null;
     }
     const userFromToken = getUser(token);
+    console.log(userFromToken);
+    
     if (!userFromToken){
         return null;
     }
@@ -16,6 +21,8 @@ async function giveUserFromDb(token){
         _id:userFromToken._id,
         email: userFromToken.email
     })
+    console.log(user);
+    
     if (!user){
         return null;
     }
