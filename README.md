@@ -82,7 +82,7 @@ VITE_BACKENDURL=<backend_url_for_frontend>
 - **Responsive UI**: Tailwind CSS for design and layout.
 - **State Management**: Redux Toolkit for managing application state.
 - **Routing**: React Router DOM for seamless navigation.
-
+- **Real-Time Updates**: Socket.IO for improved user experience and live updates.
 ---
 
 ## 🚀 About Me
