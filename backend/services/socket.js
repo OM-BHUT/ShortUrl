@@ -7,7 +7,7 @@ let io;
 function initSocket(server){
     io = new Server(server,{
         cors:{
-            origin:[process.env.COR_URL1,process.env.COR_URL2],
+            origin:[process.env.COR_URL1,process.env.COR_URL2,process.env.CLIENT_URL],
             credentials: true
         }
     });

@@ -26,7 +26,7 @@ mongoose.connect(process.env.DBURL)
 
         // Session and CORS
         app.use(cors({
-            origin: [process.env.COR_URL1, process.env.COR_URL2],
+            origin: [process.env.COR_URL1, process.env.COR_URL2,process.env.CLIENT_URL],
             credentials: true
         }));
         app.use(cookieParser());
