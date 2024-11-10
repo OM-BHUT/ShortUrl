@@ -48,6 +48,11 @@ mongoose.connect(process.env.DBURL)
         app.use(passport.initialize());
         app.use(passport.session());
 
+        app.use((req,res,next)=>{
+        console.log('entered after changes');
+        next();
+        })
+
         // Static files and routes
         app.use('/api/static', express.static(path.join(__dirname, 'public/images')));
         app.use('/api/shortUrl', checkForAuthentication, router);
