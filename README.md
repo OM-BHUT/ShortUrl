@@ -94,7 +94,7 @@ I'm a full-stack developer with experience in building scalable web applications
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/om-bhut-ab93972b9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
 [![Twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/Om_Bhut1725?t=togZO9AIn7UQTJyuj1sDog&s=08)
-[![Instagram](https://img.shields.io/badge/instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)]([https://instagram.com/Om_Bhut1725](https://www.instagram.com/reactivcoderz/profilecard/?igsh=MWp5MHNnNDBkNWtoNw==))
+[![Instagram](https://img.shields.io/badge/instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/reactivcoderz/profilecard/?igsh=MWp5MHNnNDBkNWtoNw==)
 
 ---
 
