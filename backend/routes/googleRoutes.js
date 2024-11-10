@@ -38,6 +38,7 @@ googleRoutes.get('/login/failed',(req,res)=>{
 })
 
 googleRoutes.get('/callback', passport.authenticate('google', {
+    successRedirect: process.env.CLIENT_URL+"user",
     failureRedirect: '/api/google/login/failed'
 }));
 
