@@ -21,11 +21,12 @@ export function SignUp() {
     const isDisabled = ! (checkEmail && passCheck && confirmPass==data.password && userName);
     const dispatch = useDispatch();
     const [isLoading,setIsLoading] = useState(false);
+    const API_URL = import.meta.env.VITE_BACKENDURL;
 
     function handleSubmit(e){
         e.preventDefault();
         setIsLoading(true);
-        axios.post('/api/users',data)
+        axios.post(API_URL+'/api/users',data)
             .then(res=>{
 
                 dispatch(addUser(res.data))

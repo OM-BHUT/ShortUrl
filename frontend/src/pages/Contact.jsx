@@ -14,7 +14,7 @@ export function Contact() {
                className="flex flex-row items-center gap-6 cursor-pointer max-w-xs sm:max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full"
 
             >
-                <img src={`/api/static/${handle.src}`} alt={handle.alt} className={'h-11 max-w-full'}/>
+                <img src={import.meta.env.VITE_BACKENDURL+`/api/static/${handle.src}`} alt={handle.alt} className={'h-11 max-w-full'}/>
                 <h5 className="mb-2 text-xs md:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{handle.uName}</h5>
             </a>
         </>

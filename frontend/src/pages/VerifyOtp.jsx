@@ -17,6 +17,7 @@ export function VerifyOtp() {
     const [timerId, setTimerId] = useState(null);
     const user = useSelector(state => state.user);
     const [isLoading,setIsLoading] = useState(false);
+    const API_URL = import.meta.env.VITE_BACKENDURL;
 
     useEffect(()=>{
         if (user.email==='' || Object.keys(user).length===0){
@@ -44,7 +45,7 @@ export function VerifyOtp() {
     function handleVerify(e) {
         e.preventDefault();
         setIsLoading(true);
-        axios.post('/api/users/verify', data)
+        axios.post(API_URL+'/api/users/verify', data)
             .then(res => {
                 navigate('/login');
             })
@@ -64,7 +65,7 @@ export function VerifyOtp() {
             setCountDownValue(60);
 
 
-            axios.get('/api/users/resendOtp')
+            axios.get(API_URL+'/api/users/resendOtp')
                 .then(res => {
                     Swal.fire({
                         position: 'bottom-right',

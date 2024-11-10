@@ -6,7 +6,7 @@ export function GoogleButton() {
     const dispatch = useDispatch();
     function handleSignIn(){
         dispatch(setGoogleUser());
-        window.location.href='/api/google';
+        window.location.href=import.meta.env.VITE_BACKENDURL + '/api/google';
     }
 
 

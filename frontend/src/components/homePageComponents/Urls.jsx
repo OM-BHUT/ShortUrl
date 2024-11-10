@@ -1,14 +1,15 @@
 import {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {deleteUrl, fetchUrls} from "@/redux/slice/changesSlice.js";
+import {deleteUrl, fetchUrls, incrementViewCount} from "@/redux/slice/changesSlice.js";
 import style from './css/hideScrollBar.module.css';
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { io } from 'socket.io-client';
+const socket = io(import.meta.env.VITE_BACKENDURL);
 
 export function Urls() {
     const urls = useSelector(state => state.shortUrls);
     const host = useSelector(state => state.user.host);
-    console.log(urls);
     const dispatch = useDispatch();
     const [error,setError] = useState('');
     const [message,setMessage] = useState('');
@@ -17,6 +18,15 @@ export function Urls() {
     useEffect(()=>{
         dispatch(fetchUrls());
     },[]);
+
+    useEffect(()=>{
+        socket.on('count increased',(data)=>{
+            dispatch(incrementViewCount(data));
+        });
+        return () => {
+            socket.off('count increased');
+        };
+    },[socket]);
 
     function redirectUrl(url) {
         let newUrl = url.split('://');
@@ -29,21 +39,23 @@ export function Urls() {
         return newUrl[1];
     }
 
-    function handleDelete(shortId){
-        axios.delete('/api/shortUrl/'+shortId)
-            .then((res)=>{
-                dispatch(deleteUrl(shortId));
-                dispatch(fetchUrls());
+    function handleDelete(shortId) {
+        axios.delete(`${import.meta.env.VITE_BACKENDURL}/api/shortUrl/${shortId}`, {
+            withCredentials: true,
+        })
+            .then(() => {
+                dispatch(deleteUrl(shortId)); // Dispatch with just the shortId
             })
-            .catch((err)=>{
-                if (err.response){
-                    const message = err.response.data.message;
-                    setError(message)
-                }else{
-                    setError('Login Failed '+err);
+            .catch((err) => {
+                if (err.response) {
+                    setError(err.response.data.message);
+                } else {
+                    setError('Error deleting URL: ' + err);
                 }
-            })
+            });
     }
+
+
 
     function copyToClipBoard(shortUrl){
         navigator.clipboard.writeText(shortUrl)

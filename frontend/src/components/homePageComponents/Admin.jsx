@@ -17,7 +17,7 @@ export function Admin() {
     },[user]);
 
     useEffect(()=>{
-        axios.get('/api/shortUrl/admin/allUrl')
+        axios.get(import.meta.env.VITE_BACKENDURL + '/api/shortUrl/admin/allUrl' ,{withCredentials:true})
             .then(res=> {
                 setUrls(res.data)
             })
@@ -25,7 +25,7 @@ export function Admin() {
     },[]);
 
     function handleDelete(shortId) {
-        axios.delete('/api/shortUrl/' + shortId)
+        axios.delete(import.meta.env.VITE_BACKENDURL + '/api/shortUrl/' + shortId ,{withCredentials:true})
             .then((res) => {
                 setUrls(urls.filter(url => url.shortId !== shortId));
             })

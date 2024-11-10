@@ -6,6 +6,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const User = require("../models/users");
 const url = require("node:url");
+const {getIo} = require("../services/socket");
 
 async function handleShortRoutes(req,res){
     const body = req.body;
@@ -20,27 +21,40 @@ async function handleShortRoutes(req,res){
         return res.send(newUrl);
 }
 
-async function handleRedirectToOriginalUrl(req,res){
-    const url = req.params.shortId;
-    const urlObj = await shortUrl.findOneAndUpdate({
-            shortId:url,
-    },{
-        $push:{
-            details:{
-                timestamp:Date.now(),
-            }
-        }
-    }
-    );
-    if (!urlObj) {
-        return res.status(400).json({error:true,message:'no user found'})
-    }
-    const redirectUrl = urlObj.redirectUrl.startsWith('http')
-        ? urlObj.redirectUrl
-        : `http://${urlObj.redirectUrl}`;
+async function handleRedirectToOriginalUrl(req, res) {
+    try {
+        const url = req.params.shortId;
 
-    return  res.redirect(redirectUrl);
+        const urlObj = await shortUrl.findOneAndUpdate(
+            { shortId: url },
+            { $push: { details: { timestamp: Date.now() } } },
+            { new: true }
+        );
+
+        if (!urlObj) {
+            return res.status(400).json({ error: true, message: 'No URL found' });
+        }
+
+        const redirectUrl = urlObj.redirectUrl.startsWith('http')
+            ? urlObj.redirectUrl
+            : `http://${urlObj.redirectUrl}`;
+
+        const io = getIo();
+        if (io) {
+            io.emit('count increased', {
+                shortId: urlObj.shortId ,
+                details: urlObj.details
+            });
+        }
+
+        return res.redirect(redirectUrl);
+
+    } catch (error) {
+        console.error("Error in handleRedirectToOriginalUrl:", error);
+        return res.status(500).json({ error: true, message: 'Internal Server Error' });
+    }
 }
+
 
 async function handleAnalytics(req,res){
     const url = req.params.shortId;
@@ -53,7 +67,6 @@ async function handleAnalytics(req,res){
 }
 // get all
 async function handleGetAll(req,res){
-    console.log('from handleGetAll');
 
     const url = await shortUrl.find({createdBy: req.user.email});
     if (!url){

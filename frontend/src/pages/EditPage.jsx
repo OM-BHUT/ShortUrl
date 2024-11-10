@@ -54,9 +54,15 @@ export function EditPage() {
 
         setIsLoading(true); // Set loading state to true
         try {
-            const response = await axios.post('/api/users/profilePicture', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' },
-            });
+            const response = await axios.post(
+                `${import.meta.env.VITE_BACKENDURL}/api/users/profilePicture`,
+                formData,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                    withCredentials: true, // Ensures cookies are sent along with the request
+                }
+            );
+
             dispatch(setProfilePicture(response.data.url));
             setFile(null); // Clear the file input after upload
         } catch (error) {
@@ -82,7 +88,7 @@ export function EditPage() {
 
     async function handleDeleteProfilePicture(e){
         try {
-            const response = await axios.delete('/api/users/setToDefaultPicture');
+            const response = await axios.delete(import.meta.env.VITE_BACKENDURL + '/api/users/setToDefaultPicture',{withCredentials:true});
             dispatch(setProfilePicture(response.data.defaultUrl));
         }catch (e) {
             console.log('err ',e);
@@ -92,7 +98,11 @@ export function EditPage() {
     async function handleSubmit(e){
         e.preventDefault();
         try {
-            const response = await axios.patch('/api/users/changeName', {name});
+            const response = await axios.patch(
+                `${import.meta.env.VITE_BACKENDURL}/api/users/changeName`,
+                { name },
+                { withCredentials: true }
+            );
             dispatch(changeName(name));
             navigate('/home/details');
         }catch (e) {
@@ -200,7 +210,7 @@ export function EditPage() {
                                         className="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 flex items-center justify-center gap-2 w-full"
                                         onClick={homeButtonClicked}
                                     >
-                                        <img src={'/api/static/home.svg'} alt={'home logo'} className={'h-6 w-6'}/>
+                                        <img src={import.meta.env.VITE_BACKENDURL + '/api/static/home.svg'} alt={'home logo'} className={'h-6 w-6'}/>
                                         Home
                                     </button>
                                     <button

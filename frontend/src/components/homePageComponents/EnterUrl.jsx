@@ -14,10 +14,9 @@ export function EnterUrl(props) {
     const [urlCheck,setUrlCheck] = useState(false);
     const isDisabled = !urlCheck;
     const dispatch = useDispatch();
-
     function handleEnter(e){
         e.preventDefault();
-        axios.post('/api/shortUrl', data)
+        axios.post(import.meta.env.VITE_BACKENDURL + '/api/shortUrl', data, { withCredentials: true })
             .then(res => {
                 dispatch(addUrl(res.data));
                 Swal.fire({

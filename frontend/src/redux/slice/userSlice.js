@@ -1,10 +1,9 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
-import {retry} from "@reduxjs/toolkit/query";
 
 export const fetchUser = createAsyncThunk('fetchUser',async (_,rejectWithValue)=>{
     try {
-        const response = await axios.get('/api/users/isVerified');
+        const response = await axios.get(import.meta.env.VITE_BACKENDURL + '/api/users/isVerified');
         return response.data;
     }catch (e) {
         console.log('error ',e);

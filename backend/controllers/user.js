@@ -112,10 +112,15 @@ async function giveHostName(req,res){
   return res.send(host);
 }
 
-async function handleLogOut(req,res){
-   res.clearCookie('userId');
-  res.status(200).json({message:'user logged Out Successfully'});
+async function handleLogOut(req, res) {
+  res.clearCookie('userId', {
+    httpOnly: true,
+    sameSite: 'None',  // For cross-site cookies
+    secure: true       // Ensure it's set if on HTTPS
+  });
+  res.status(200).json({ message: 'User logged out successfully' });
 }
+
 
 
 

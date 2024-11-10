@@ -1,45 +1,61 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = [];
 
-function addUrlHandler(state,action){
+// Handlers
+function addUrlHandler(state, action) {
     state.push(action.payload);
 }
 
-function removeUrlHandler(state , action){
-    state = state.filter(url => action.payload.shortId!==url.shortId);
+function removeUrlHandler(state, action) {
+    const index = state.findIndex(url => url.shortId === action.payload);
+    if (index !== -1) {
+        state.splice(index, 1);
+    }
 }
-export const fetchUrls = createAsyncThunk('fetchUrls',async ()=>{
+
+function increaseViewCount(state, action) {
+
+    const urlIndex = state.findIndex(url => url.shortId === action.payload.shortId);
+    if (urlIndex !== -1) {
+        state[urlIndex].details = action.payload.details;  // Update the entire details array
+    }
+}
+
+
+
+
+// Thunks
+export const fetchUrls = createAsyncThunk('fetchUrls', async () => {
     try {
-        const response = await axios.get('/api/shortUrl');
+        const response = await axios.get(`${import.meta.env.VITE_BACKENDURL}/api/shortUrl`, { withCredentials: true });
         return response.data;
-    }catch (error) {
-        console.log('error ',error);
+    } catch (error) {
+        console.error('Error fetching URLs:', error);
         throw error;
     }
-})
+});
 
+// Slice
 export const changesSlice = createSlice({
-    name:'shortUrls',
+    name: 'shortUrls',
     initialState,
-    reducers:{
+    reducers: {
         addUrl: addUrlHandler,
-        deleteUrl: removeUrlHandler
+        deleteUrl: removeUrlHandler,
+        incrementViewCount: increaseViewCount,
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchUrls.fulfilled,(state,action)=>{
-            // state.data = action.payload;
+        builder.addCase(fetchUrls.fulfilled, (state, action) => {
             return action.payload;
         });
-            builder.addCase(fetchUrls.rejected,(state,action)=>{
-                console.log('error' ,action.payload);
-            })
+        builder.addCase(fetchUrls.rejected, (state, action) => {
+            console.error('Error in fetchUrls:', action.error);
+        });
     }
-})
+});
 
-
-
-export const {addUrl,deleteUrl} = changesSlice.actions;
-
+// Exports
+export const { addUrl, deleteUrl, incrementViewCount } = changesSlice.actions;
 export default changesSlice.reducer;

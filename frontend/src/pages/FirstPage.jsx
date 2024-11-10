@@ -6,7 +6,7 @@ export function FirstPage() {
         <>
             <div className="bg-gradient-to-b from-gray-100 to-gray-300 dark:from-gray-900 dark:to-gray-800 flex flex-col items-center justify-center min-h-screen">
                 <img
-                    src={'/api/static/url-shortener-logo.png'}
+                    src={import.meta.env.VITE_BACKENDURL + '/api/static/url-shortener-logo.png'}
                     alt="Url Shortener"
                     className="w-full max-w-md h-auto mb-6"
                 />

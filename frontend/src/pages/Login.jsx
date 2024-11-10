@@ -18,15 +18,16 @@ export function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isLoading,setIsLoading] = useState(false);
+    const API_URL = import.meta.env.VITE_BACKENDURL;
 
     useEffect(()=>{
         const fetchUser = async ()=>{
             try {
-                const userDetails = await axios.get('/api/users/giveTokenInfo');
+                const userDetails = await axios.get(`${API_URL}/api/users/giveTokenInfo`, { withCredentials: true });
                 const type = userDetails.data.userType === 'google' ? '/google' : '';
-                const response = await axios.get('/api/users/isVerified'+type);
+                const response = await axios.get(`${API_URL}/api/users/isVerified`+type, { withCredentials: true });
                 if (response.status===200){
-                    const host = (await axios.get('/api/users/hostAddress')).data;
+                    const host = (await axios.get(`${API_URL}/api/users/hostAddress`, { withCredentials: true })).data;
                     dispatch(addUser({...response.data,host}));
                     navigate('/home');
                 }
@@ -42,10 +43,9 @@ export function Login() {
         e.preventDefault();
         setIsLoading(true);
         try {
-            console.log('from handleLogin');
-            const res = await axios.post('/api/users/login', data);
+            const res = await axios.post(`${API_URL}/api/users/login`, data, { withCredentials: true });
             if (res.status === 200) {
-                const host = (await axios.get('/api/users/hostAddress')).data;
+                const host = (await axios.get(`${API_URL}/api/users/hostAddress`, { withCredentials: true })).data;
                 dispatch(addUser({...res.data,host}));
                 // You can navigate here if needed
                 navigate('/home');
@@ -72,7 +72,7 @@ export function Login() {
                     <LoadingBar isLoading={isLoading}/>
                     <div className="flex items-center text-2xl font-semibold text-gray-900 dark:text-white">
                         <img className="w-24 h-auto mr-2 font-normal"
-                             src={"/api/static/url-shortener-logo.png"} alt="logo"/>
+                             src={`${API_URL}/api/static/url-shortener-logo.png`} alt="logo"/>
                         Url Shortener
                     </div>
                     <div

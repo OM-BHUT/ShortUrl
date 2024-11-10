@@ -8,14 +8,16 @@ export function DetailsPage() {
     const user = useSelector(state => state.user);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const API_URL = import.meta.env.VITE_BACKENDURL;
     useEffect(()=>{
         if (user.email==='' || Object.keys(user).length===0){
             navigate('/login');
         }
     },[user,navigate]);
 
+
 function handleSignOut(){
-    axios.post('/api/users/logout')
+    axios.post(API_URL+'/api/users/logout', {} ,{ withCredentials: true })
         .then(res=>{
             dispatch(logOutUser());
             // navigate('/login');
@@ -43,13 +45,13 @@ function handleSignOut(){
                             }}
                         >
                             Edit
-                            <img src={'/api/static/edit.svg'} alt={'edit'}/>
+                            <img src={API_URL+'/api/static/edit.svg'} alt={'edit'}/>
                         </button>
 
                         <button type="button"
                                 className="inline-flex items-center px-3 py-2 gap-x-5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onClick={handleSignOut}>Log
                             Out
-                            <img src={'/api/static/logOut.svg'} alt={'Log out'}/>
+                            <img src={API_URL+'/api/static/logOut.svg'} alt={'Log out'}/>
                         </button>
                     </div>
                 </div>

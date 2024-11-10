@@ -15,7 +15,7 @@ const schema = new mongoose.Schema({
     },
     profilePicture:{
         type:String,
-        default:'/api/static/default-profile-account.jpg'
+        default:'https://shorturl-16sn.onrender.com/api/static/default-profile-account.jpg'
     },
     role:{
       type:String,

@@ -18,11 +18,12 @@ export function ForgetPass() {
     const isDisabled = !(checkEmail && passCheck && confirmPass === data.password);
     const dispatch = useDispatch();
     const [isLoading,setIsLoading] = useState(false);
+    const API_URL = import.meta.env.VITE_BACKENDURL;
 
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
-        axios.patch('/api/users/forgetPass',data)
+        axios.patch(API_URL+'/api/users/forgetPass',data)
             .then(res=>{
                 if (res.status===200) {
                     dispatch(addUser({email:data.email}));
@@ -44,7 +45,7 @@ export function ForgetPass() {
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                 <LoadingBar isLoading={isLoading}/>
                 <a className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                    <img className="w-16 h-12" src={"/api/static/url-shortener-logo.png"} alt="logo" />
+                    <img className="w-16 h-12" src={API_URL+"/api/static/url-shortener-logo.png"} alt="logo" />
                     Url Shortener
                 </a>
                 <div className="w-full p-6 bg-white rounded-lg shadow dark:border sm:max-w-md dark:bg-gray-800 dark:border-gray-700">

@@ -15,6 +15,7 @@ export function Layout() {
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
+    console.log(user);
     const navigation = [
         { name: 'All Urls', href: '/home', current: true },
         ...(user.role === 'admin' ? [{ name: 'Admin', href: '/home/admin', current: false }] : []),
@@ -26,12 +27,20 @@ export function Layout() {
         }
     },[user,navigate]);
 
-    function handleSignOut(){
-        axios.post('/api/users/logout')
-            .then(res=>{
-                dispatch(logOutUser());
-            })
+    async function handleSignOut() {
+        try {
+            const response = await axios.post(
+                import.meta.env.VITE_BACKENDURL + '/api/users/logout',
+                {},  // Empty payload
+                { withCredentials: true }  // Ensure cookies are sent
+            );
+            console.log(response.data.message);
+            dispatch(logOutUser());
+        } catch (error) {
+            console.log("Logout error:", error);
+        }
     }
+
 
     return (
         <Disclosure as="nav" className="bg-gray-800">
@@ -50,7 +59,7 @@ export function Layout() {
                         <div className="flex flex-shrink-0 items-center">
                             <img
                                 alt="Short Urls"
-                                src={"/api/static/url-shortener-logo.png"}
+                                src={import.meta.env.VITE_BACKENDURL + '/api/static/url-shortener-logo.png'}
                                 className="h-8 w-auto"
                             />
                         </div>
