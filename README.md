@@ -1,4 +1,4 @@
-Here’s the README in a copy-paste-ready format for GitHub:
+
 
 ---
 
@@ -134,4 +134,3 @@ npm run dev
 
 ---
 
-This README provides a clear overview of the project and offers easy access to all necessary resources for setup, usage, and deployment. Let me know if there’s anything specific you’d like to add!
