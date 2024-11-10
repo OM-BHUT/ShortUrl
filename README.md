@@ -33,15 +33,7 @@ npm run dev
 
 For deployment on a live server, configure the backend and frontend environments and set up production-ready settings.
 
----
 
-## Documentation
-
-Comprehensive documentation is available to guide you through setup, usage, and development.
-
-[View Documentation](https://linktodocumentation)
-
----
 
 ## Environment Variables
 
