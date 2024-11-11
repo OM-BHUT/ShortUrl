@@ -40,9 +40,7 @@ googleRoutes.get('/login/failed',(req,res)=>{
 googleRoutes.get('/callback', passport.authenticate('google', {
     failureRedirect: '/api/google/login/failed'
 }),(req,res)=>{
-    console.log('from /callback');
     const {user} = req;
-    console.log(user);
     const token = setUser(user);
     res.cookie('userId',token,{
         httpOnly: true,
@@ -50,8 +48,7 @@ googleRoutes.get('/callback', passport.authenticate('google', {
         sameSite: 'None', // For cross-origin cookie sharing
         maxAge: 24 * 60 * 60 * 1000
     });
-    console.log(`${process.env.CLIENT_URL}home`);
-    
+
     return res.redirect(`${process.env.CLIENT_URL}home`);
 });
 

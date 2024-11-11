@@ -15,7 +15,6 @@ export function Layout() {
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
-    console.log(user);
     const navigation = [
         { name: 'All Urls', href: '/home', current: true },
         ...(user.role === 'admin' ? [{ name: 'Admin', href: '/home/admin', current: false }] : []),
@@ -34,7 +33,6 @@ export function Layout() {
                 {},  // Empty payload
                 { withCredentials: true }  // Ensure cookies are sent
             );
-            console.log(response.data.message);
             dispatch(logOutUser());
         } catch (error) {
             console.log("Logout error:", error);
@@ -57,11 +55,13 @@ export function Layout() {
                     </div>
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                         <div className="flex flex-shrink-0 items-center">
+                            <Link to={'/home'} >
                             <img
                                 alt="Short Urls"
                                 src={import.meta.env.VITE_BACKENDURL + '/api/static/url-shortener-logo.png'}
-                                className="h-8 w-auto"
+                                className="h-8 w-auto cursor-pointer"
                             />
+                            </Link>
                         </div>
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-4">
@@ -129,8 +129,8 @@ export function Layout() {
                     {navigation.map((item) => (
                         <DisclosureButton
                             key={item.name}
-                            as="a"
-                            href={item.href}
+                            as={Link}
+                            to={item.href}
                             aria-current={item.current ? 'page' : undefined}
                             className={classNames(
                                 item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',

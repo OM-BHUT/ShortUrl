@@ -5,8 +5,7 @@ const {giveUserFromDb} = require("../services/giveUser");
 async function checkForAuthentication(req, res, next) {
     try {
         // Retrieve user from the database based on the userId in cookies
-        console.log('from checkForAuthentication');
-        
+
         const user = await giveUserFromDb(req.cookies.userId);
 
         // If user is not found, respond with a 404 error

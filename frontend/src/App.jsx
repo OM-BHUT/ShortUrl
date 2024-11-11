@@ -14,7 +14,7 @@ import {EditPage} from "@/pages/EditPage.jsx";
 import {Admin} from "@/components/homePageComponents/Admin.jsx";
 
 function App() {
-
+    
     return (
         <>
             <BrowserRouter>
