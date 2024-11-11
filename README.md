@@ -1,4 +1,4 @@
-
+Here's the updated README with the deployment link added:
 
 ---
 
@@ -25,6 +25,8 @@ A MERN stack project that allows users to generate short, shareable URLs. Simply
 
 ## Deployment
 
+The project is live at [https://shorturlob.onrender.com](https://shorturlob.onrender.com).
+
 To deploy the project locally, use the following command:
 
 ```bash
@@ -33,7 +35,7 @@ npm run dev
 
 For deployment on a live server, configure the backend and frontend environments and set up production-ready settings.
 
-
+---
 
 ## Environment Variables
 
@@ -83,6 +85,7 @@ VITE_BACKENDURL=<backend_url_for_frontend>
 - **State Management**: Redux Toolkit for managing application state.
 - **Routing**: React Router DOM for seamless navigation.
 - **Real-Time Updates**: Socket.IO for improved user experience and live updates.
+
 ---
 
 ## 🚀 About Me
@@ -125,4 +128,3 @@ npm run dev
 ```
 
 ---
-
