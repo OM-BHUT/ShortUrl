@@ -16,10 +16,7 @@ async function checkForAuthentication(req, res, next) {
         }
         // Attach the user object to the request for further use
         req.user = user;
-        console.log(req.user);
-        
-        console.log('completed checkForAuthentication');
-        
+
         // Proceed to the next middleware or route handler
         next();
     } catch (error) {
