@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const {handleUserSignUp,
+const {
     handleUserLogin,
-    showSignUp, handleTokenUser, handleTokenUserGoogle, giveInfo, giveTokenInfo, handleLogOut, giveHostName,
+     handleTokenUser, handleTokenUserGoogle, giveInfo, giveTokenInfo, handleLogOut, giveHostName,
     handleForgetPass, changeProfilePicture, handleSetToDefault, changeName,
 } = require('../controllers/user');
 const {handleRegister, giveEmailInfo, verifyEmail, resendOtp} = require("../controllers/otpVerification");

@@ -9,16 +9,6 @@ const bcrypt = require("bcryptjs");
 const {uploadOnCloudinary} = require("../services/cloudinary");
 const {giveUserFromDb} = require("../services/giveUser");
 
-async function handleUserSignUp(req, res) {
-  const { name, email, password } = req.body;
-  const user = await User.create({
-    name,
-    email,
-    password,
-  });
-  return res.render("home");
-}
-
 
 
 async function handleUserLogin(req, res) {
@@ -223,7 +213,6 @@ async function changeName(req,res){
 
 
 module.exports = {
-  handleUserSignUp,
   handleUserLogin,
   handleTokenUser,
   handleTokenUserGoogle,
