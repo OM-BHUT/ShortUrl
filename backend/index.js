@@ -14,6 +14,8 @@ const passport = require('./controllers/passport');
 const googleRoutes = require('./routes/googleRoutes');
 const { createServer } = require('node:http');
 const { initSocket } = require("./services/socket");
+const cron = require("node-cron");
+const {fetchAnalyticsData} = require("./services/googleAnalytics");
 
 // Connect to MongoDB
 mongoose.connect(process.env.DBURL)
@@ -38,7 +40,9 @@ mongoose.connect(process.env.DBURL)
                 cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 day
             })
         );
-
+        cron.schedule("0 0 * * *", () => { // Runs every day at midnight
+                fetchAnalyticsData();
+        });
         // Body parsing
         app.use(express.urlencoded({ extended: false }));
         app.use(bodyParse());

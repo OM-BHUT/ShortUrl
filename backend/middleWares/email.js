@@ -12,7 +12,7 @@ async function sendVerificationEmail(email,verification) {
             text: "Verify Your Email", // plain text body
             html: "<h1>"+verification+"</h1>", // html body
         });
-
+        
 
     }catch (error){
         console.log('email error '+error);
