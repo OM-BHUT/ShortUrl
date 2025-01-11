@@ -5,10 +5,16 @@ const path = require("path");
 const Analytics = require("../models/Analytics");
 const mongoose = require("mongoose");
 
-const keyPath = path.join(__dirname, "../keys/orbital-caldron-446205-k7-3976f0bb876a.json");
-console.log(process.env.PROPERTY_ID);
+// const keyPath = path.join(__dirname, "../keys/orbital-caldron-446205-k7-3976f0bb876a.json");
+
+const keyVal = JSON.parse(process.env.GOOGLE_ANALYTICS_KEYS_JSON);
+
+console.log(keyVal);
+console.log(keyVal.project_id);
+
+
 const authClient = new JWT({
-    keyFile: keyPath,
+    keyFile: keyVal,
     scopes: ["https://www.googleapis.com/auth/analytics.readonly"],
 });
 
