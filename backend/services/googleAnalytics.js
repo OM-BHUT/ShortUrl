@@ -9,9 +9,6 @@ const mongoose = require("mongoose");
 
 const keyVal = JSON.parse(process.env.GOOGLE_ANALYTICS_KEYS_JSON);
 
-console.log(keyVal);
-console.log(keyVal.project_id);
-
 
 const authClient = new JWT({
     keyFile: keyVal,
