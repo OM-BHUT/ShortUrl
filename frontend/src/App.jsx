@@ -12,11 +12,11 @@ import {Contact} from "@/pages/Contact.jsx";
 import {ForgetPass} from "@/pages/ForgetPass.jsx";
 import {EditPage} from "@/pages/EditPage.jsx";
 import {Admin} from "@/components/homePageComponents/Admin.jsx";
-// import ReactGa from 'react-ga4'
+
 import AnalyticsTracker from "@/googleAnalytics/AnalyticsTracker.jsx";
 import ReactGA from "react-ga4";
 
-ReactGA.initialize(import.meta.env.VITE_MEASUREMENT_ID)
+ReactGA.initialize(import.meta.env.VITE_MEASUREMENT_ID);
 ReactGA.send({ hitType: "pageview", page: "/" });
 
 function App() {

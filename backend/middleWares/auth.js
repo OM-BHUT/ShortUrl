@@ -9,8 +9,7 @@ async function checkForAuthentication(req, res, next) {
         const user = await giveUserFromDb(req.cookies.userId);
 
         // If user is not found, respond with a 404 error
-        console.log(user);
-        
+
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }

@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="611350c0-5240-461e-bac8-bf256e3ad137" name="Changes" comment="google analytics added" />
+    <list default="true" id="611350c0-5240-461e-bac8-bf256e3ad137" name="Changes" comment="google analytics added">
+      <change beforePath="$PROJECT_DIR$/backend/models/analytics.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/analytics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/googleAnalytics.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/googleAnalytics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,6 +92,7 @@
       <workItem from="1735486136634" duration="2902000" />
       <workItem from="1735489089131" duration="234000" />
       <workItem from="1735554077473" duration="107000" />
+      <workItem from="1736561233780" duration="312000" />
     </task>
     <task id="LOCAL-00001" summary="google analytics added">
       <option name="closed" value="true" />

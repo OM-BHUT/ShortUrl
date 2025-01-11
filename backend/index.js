@@ -40,9 +40,11 @@ mongoose.connect(process.env.DBURL)
                 cookie: { maxAge: 24 * 60 * 60 * 1000 } // 1 day
             })
         );
-        cron.schedule("0 0 * * *", () => { // Runs every day at midnight
-                fetchAnalyticsData();
-        });
+            cron.schedule("0 0 * * *", () => { // Runs every day at midnight
+                    fetchAnalyticsData()
+                        .then(() => console.log("Analytics data fetched successfully"))
+                        .catch(err => console.error("Cron job error:", err.message));
+            });
         // Body parsing
         app.use(express.urlencoded({ extended: false }));
         app.use(bodyParse());
